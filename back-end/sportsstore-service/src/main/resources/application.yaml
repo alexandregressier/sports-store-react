@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: apptivity-activity-service
+  profiles:
+    active: local,development
+
+--- # Local
+spring:
+  config:
+    activate.on-profile: local
+server:
+  port: 8081
+logging:
+  exception-conversion-word: '%rootException'
+
+--- # Development
+spring:
+  config:
+    activate.on-profile: development
+logging:
+  level:
+    root: INFO
+    dev.gressier.sportsstore: DEBUG

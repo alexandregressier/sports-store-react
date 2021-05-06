@@ -37,11 +37,11 @@ export default class App extends Component<{}, AppState> {
         })
 
     toggleTodo = (toDo: ToDo) => this.setState({
-        toDos: this.state.toDos.map(it => it.text == toDo.text ? { ...it, isDone: !it.isDone } : it)
+        toDos: this.state.toDos.map(it => it.text === toDo.text ? { ...it, isDone: !it.isDone } : it)
     })
 
     showToDoRows = () => this.state.toDos.map(toDo =>
-        <tr>
+        <tr key={toDo.text}>
             <td>{toDo.text}</td>
             <td><input type="checkbox" checked={toDo.isDone} onChange={() => this.toggleTodo(toDo)}/></td>
         </tr>
@@ -54,20 +54,23 @@ export default class App extends Component<{}, AppState> {
                 ({this.state.toDos.filter(t => !t.isDone).length} left)
             </h4>
             <div className="container-fluid">
-                <input type="text" className="form-control" value={this.state.newToDoText}
-                       onChange={e => this.setState({ newToDoText: e.target.value })} placeholder="Something to do..."/>
-                <button className="btn btn-primary m2" onClick={this.createNewTodo}>
-                    Add
-                </button>
+                <div className="my-1">
+                    <input type="text" className="form-control" value={this.state.newToDoText}
+                           onChange={e => this.setState({ newToDoText: e.target.value })}
+                           placeholder="Something to do..."/>
+                    <button className="btn btn-primary mt-1" onClick={this.createNewTodo}>
+                        Add
+                    </button>
+                </div>
+                <table className="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Done</th>
+                    </tr>
+                    </thead>
+                    <tbody>{this.showToDoRows()}</tbody>
+                </table>
             </div>
-            <table className="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Done</th>
-                </tr>
-                </thead>
-                <tbody>{this.showToDoRows()}</tbody>
-            </table>
         </div>
 }

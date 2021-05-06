@@ -33,10 +33,6 @@
         "error",
         "never"
       ],
-      "comma-dangle": [
-        "error",
-        "only-multiline"
-      ],
       "quotes": [
         "error",
         "double"

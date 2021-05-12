@@ -3,6 +3,7 @@
   "workspaces": [
     "sportsstore-web-app",
     "todo-web-app",
-    "primer-web-app"
+    "primer-web-app",
+    "styled-components"
   ]
 }

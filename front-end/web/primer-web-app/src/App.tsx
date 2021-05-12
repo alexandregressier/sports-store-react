@@ -1,10 +1,8 @@
-import React, { Component } from "react"
+import React from "react"
 
-export default class App extends Component {
-    render = () =>
-        <div>
-            <h4 className="bg-primary text-white text-center p-2">
-                Primer
-            </h4>
-        </div>
-}
+export const App = () =>
+    <div>
+        <h4 className="bg-primary text-white text-center p-2">
+            Primer
+        </h4>
+    </div>

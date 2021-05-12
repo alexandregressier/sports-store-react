@@ -17,4 +17,5 @@ include(
     "front-end:web:sportsstore-web-app",
     "front-end:web:todo-web-app",
     "front-end:web:primer-web-app",
+    "front-end:web:styled-components",
 )

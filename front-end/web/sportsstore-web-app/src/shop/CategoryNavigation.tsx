@@ -1,18 +1,17 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
+import { ToggleLink } from "../ToggleLink"
 
 export const CategoryNavigation = (props: {
     baseUrl: string,
     categories: string[],
 }) =>
     <>
-        <Link className="btn btn-secondary btn-block" to={props.baseUrl}>
+        <ToggleLink to={props.baseUrl} exact={true}>
             All
-        </Link>
+        </ToggleLink>
         {props.categories && props.categories.map(category =>
-            <Link key={category} className="btn btn-secondary btn-block"
-                  to={`${props.baseUrl}/${category.toLowerCase()}`}>
+            <ToggleLink key={category} to={`${props.baseUrl}/${category.toLowerCase()}`}>
                 {category}
-            </Link>
+            </ToggleLink>
         )}
     </>

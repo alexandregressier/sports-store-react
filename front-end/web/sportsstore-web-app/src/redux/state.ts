@@ -1,6 +1,15 @@
-import { ShopState } from "./ShopState"
+import { Order, Product } from "./domain"
 
-export const data = {
+export interface SportsStoreState {
+    categories: string[],
+    products: Product[],
+    orders: Order[],
+    cart: { product: Product, quantity: number }[],
+    cartItems: number,
+    cartTotal: number,
+}
+
+export const initState: SportsStoreState = {
     categories:  ["Watersports", "Soccer", "Chess"],
     products: [
         { id: 1, name: "Kayak", category: "Watersports", description: "A boat for one person", price: 275 },
@@ -14,4 +23,7 @@ export const data = {
         { id: 9, name: "Bling Bling King", category: "Chess", description: "Gold-plated, diamond-studded King", price: 1200 },
     ],
     orders: [],
-} as ShopState
+    cart: [],
+    cartItems: 0,
+    cartTotal: 0,
+}

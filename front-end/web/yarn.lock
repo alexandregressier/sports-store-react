@@ -10084,6 +10084,11 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
+scope-extensions-js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/scope-extensions-js/-/scope-extensions-js-1.1.0.tgz#4912f7a6f2aa4795bdda46309461555b076bdf09"
+  integrity sha512-SbxLXgaw2R04te1dfviB0HHzD2dPcOQh/CFSn0JiJ9EHTFCqA0rOOMfIwqi/oN2cQlaiWR/zQLCwSCtJ0bYF5Q==
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"

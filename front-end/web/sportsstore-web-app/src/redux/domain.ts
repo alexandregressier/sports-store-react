@@ -1,9 +1,3 @@
-export interface ShopState {
-    categories: string[],
-    products: Product[],
-    orders: Order[],
-}
-
 export interface Product {
     id: number,
     name: string,

@@ -1,37 +1,27 @@
 import { Redirect, Route, Switch } from "react-router-dom"
-import { loadData } from "../data/ActionCreators"
-import { Product, ShopState } from "../data/ShopState"
+import { DataType, loadData } from "../redux/actions/ShopActionCreators"
+import { Product } from "../redux/domain"
 import { Shop } from "./Shop"
 import { useEffect } from "react"
-import { DataType } from "../data/Types"
 import { connect } from "react-redux"
-import { RootState } from "../data/DataStore"
+import { addToCart, clearCart, removeFromCart, updateCartQuantity } from "../redux/actions/CartActionCreators"
+import { SportsStoreState } from "../redux/state"
 
-const mapStateToProps = (state: RootState) => ({
-    ...state // Map all the state
-} as ShopState)
-
-const mapDispatchToProps = {
-    loadData
-}
+const mapStateToProps = (state: SportsStoreState) => ({ ...state } as SportsStoreState)
+const mapDispatchToProps = { loadData, addToCart, updateCartQuantity, removeFromCart, clearCart }
 
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = typeof mapDispatchToProps
 
-interface ShopProps {
-    categories: string[]
-    products: Product[]
-}
-
-type Props = StateProps & DispatchProps & ShopProps
+export type Props = StateProps & DispatchProps
 
 const filterProductsByCategory = (products: Product[] = [], category?: string) =>
     (!category || category === "All")
         ? products
         : products.filter(it => it.category.toLowerCase() === category.toLowerCase())
 
-export const ShopConnector =
-    connect<StateProps, DispatchProps, ShopProps, RootState>(mapStateToProps, mapDispatchToProps)((props: Props) => {
+export const Connector =
+    connect(mapStateToProps, mapDispatchToProps)((props: Props) => {
         useEffect(() => {
             props.loadData(DataType.CATEGORIES)
             props.loadData(DataType.PRODUCTS)

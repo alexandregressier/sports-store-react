@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { connect } from "react-redux"
 import { addToCart, clearCart, removeFromCart, updateCartQuantity } from "../redux/actions/CartActionCreators"
 import { SportsStoreState } from "../redux/state"
+import { CartDetails } from "./CartDetails"
 
 const mapStateToProps = (state: SportsStoreState) => ({ ...state } as SportsStoreState)
 const mapDispatchToProps = { loadData, addToCart, updateCartQuantity, removeFromCart, clearCart }
@@ -27,9 +28,12 @@ export const Connector =
             props.loadData(DataType.PRODUCTS)
         })
         return <Switch>
-            <Route path="/shop/products/:category?" render={(routeProps) =>
+            <Route path="/shop/products/:category?" render={routeProps =>
                 <Shop {...props} {...routeProps}
                       products={filterProductsByCategory(props.products, routeProps.match.params.category)}/>
+            }/>
+            <Route path="/shop/cart" render={routeProps =>
+                <CartDetails {...props} {...routeProps}/>
             }/>
             <Redirect to="/shop/products"/>
         </Switch>

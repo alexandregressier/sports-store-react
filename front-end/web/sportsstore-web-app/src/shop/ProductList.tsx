@@ -5,7 +5,7 @@ import { Product } from "../redux/domain"
 
 export const ProductList = (props: {
     products: Product[],
-    addToCart: any,
+    addToCart: (product: Product, quantity?: number) => any,
 }) =>
     pipe(
         fromArray(props.products),

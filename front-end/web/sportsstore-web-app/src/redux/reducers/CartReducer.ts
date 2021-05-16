@@ -30,7 +30,7 @@ export const cartReducer = (state: SportsStoreState = initState, action: CartAct
             (action as ReturnType<typeof updateCartQuantity>).payload.let(({ product, quantity }) => {
                 newState.cart = newState.cart.map(it => {
                     if (it.product.id === product.id) {
-                        (it.quantity - quantity).let(quantityDiff => {
+                        (quantity - it.quantity).let(quantityDiff => {
                             newState.cartItems += quantityDiff
                             newState.cartTotal += product.price * quantityDiff
                         })
@@ -44,7 +44,7 @@ export const cartReducer = (state: SportsStoreState = initState, action: CartAct
         case CartActionType.CART_REMOVE:
             (action as ReturnType<typeof removeFromCart>).payload.run(function () {
                 newState.cart.find(it => it.product.id === this.product.id)?.let(({ product, quantity }) => {
-                    newState.cart.filter(it => it.product.id !== product.id)
+                    newState.cart = newState.cart.filter(it => it.product.id !== product.id)
                     newState.cartItems -= quantity
                     newState.cartTotal -= product.price * quantity
                 })

@@ -1,4 +1,3 @@
-import { Order, Product } from "../domain"
 import { initState, SportsStoreState } from "../state"
 import { DataType, ShopActionType } from "../actions/ShopActionCreators"
 
@@ -6,7 +5,7 @@ export interface ShopAction {
     type: ShopActionType,
     payload: {
         dataType: DataType // Domain property
-        data: string[] | Product[] | Order[]
+        data: any
     }
 }
 

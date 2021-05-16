@@ -1,15 +1,5 @@
-import { Product } from "./domain"
-
-export interface SportsStoreState {
-    categories: string[],
-    products: Product[],
-    cart: { product: Product, quantity: number }[],
-    cartItems: number,
-    cartTotal: number,
-}
-
-export const initState: SportsStoreState = {
-    categories:  ["Watersports", "Soccer", "Chess"],
+module.exports = () => ( {
+    categories: ["Watersports", "Soccer", "Chess"],
     products: [
         { id: 1, name: "Kayak", category: "Watersports", description: "A boat for one person", price: 275 },
         { id: 2, name: "Lifejacket", category: "Watersports", description: "Protective and fashionable", price: 48.95 },
@@ -21,7 +11,5 @@ export const initState: SportsStoreState = {
         { id: 8, name: "Human Chess Board", category: "Chess", description: "A fun game for the family", price: 75 },
         { id: 9, name: "Bling Bling King", category: "Chess", description: "Gold-plated, diamond-studded King", price: 1200 },
     ],
-    cart: [],
-    cartItems: 0,
-    cartTotal: 0,
-}
+    orders: []
+})

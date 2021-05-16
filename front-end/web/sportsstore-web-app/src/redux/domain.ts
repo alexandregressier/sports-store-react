@@ -5,7 +5,3 @@ export interface Product {
     description: string,
     price: number,
 }
-
-export interface Order {
-    products: Product[]
-}

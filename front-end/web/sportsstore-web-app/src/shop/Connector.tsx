@@ -1,8 +1,8 @@
 import { Redirect, Route, Switch } from "react-router-dom"
-import { DataType, loadData } from "../redux/actions/ShopActionCreators"
-import { Product } from "../redux/domain"
+import { loadData } from "../redux/actions/ShopActionCreators"
+import { DataType, Product } from "../redux/domain"
 import { Shop } from "./Shop"
-import { useEffect } from "react"
+import { Component } from "react"
 import { connect } from "react-redux"
 import { addToCart, clearCart, removeFromCart, updateCartQuantity } from "../redux/actions/CartActionCreators"
 import { SportsStoreState } from "../redux/state"
@@ -21,20 +21,21 @@ const filterProductsByCategory = (products: Product[] = [], category?: string) =
         ? products
         : products.filter(it => it.category.toLowerCase() === category.toLowerCase())
 
-export const Connector =
-    connect(mapStateToProps, mapDispatchToProps)((props: Props) => {
-        useEffect(() => {
-            props.loadData(DataType.CATEGORIES)
-            props.loadData(DataType.PRODUCTS)
-        })
-        return <Switch>
+export const Connector = connect(mapStateToProps, mapDispatchToProps)(
+    class extends Component<Props> {
+        componentDidMount() {
+            this.props.loadData(DataType.CATEGORIES)
+            this.props.loadData(DataType.PRODUCTS)
+        }
+        render = () => <Switch>
             <Route path="/shop/products/:category?" render={routeProps =>
-                <Shop {...props} {...routeProps}
-                      products={filterProductsByCategory(props.products, routeProps.match.params.category)}/>
+                <Shop {...this.props} {...routeProps} products={
+                    filterProductsByCategory(this.props.products, routeProps.match.params.category)}/>
             }/>
             <Route path="/shop/cart" render={routeProps =>
-                <CartDetails {...props} {...routeProps}/>
+                <CartDetails {...this.props} {...routeProps}/>
             }/>
             <Redirect to="/shop/products"/>
         </Switch>
-    })
+    }
+)

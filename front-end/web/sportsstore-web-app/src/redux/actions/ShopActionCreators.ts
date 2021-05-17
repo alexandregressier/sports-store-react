@@ -1,17 +1,13 @@
-import { initState as placeholderData } from "../state"
-import { ShopAction } from "../reducers/ShopReducer"
+import { DataType } from "../domain"
+import { RestDataSource } from "../dataSource"
 
 export enum ShopActionType {
     DATA_LOAD = "data_load",
 }
-export enum DataType {
-    PRODUCTS = "products",
-    CATEGORIES = "categories",
-}
-export const loadData = (dataType: DataType): ShopAction => ({
+const dataSource = new RestDataSource()
+
+export const loadData = (dataType: DataType) => ({
     type: ShopActionType.DATA_LOAD,
-    payload: {
-        dataType,
-        data: placeholderData[dataType]
-    }
+    payload: dataSource.GetData(dataType)
+        .then(response => ({ dataType, data: response.data }))
 })

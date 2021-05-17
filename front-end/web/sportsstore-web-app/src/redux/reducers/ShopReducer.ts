@@ -1,10 +1,11 @@
 import { initState, SportsStoreState } from "../state"
-import { DataType, ShopActionType } from "../actions/ShopActionCreators"
+import { ShopActionType } from "../actions/ShopActionCreators"
+import { DataType } from "../domain"
 
 export interface ShopAction {
     type: ShopActionType,
     payload: {
-        dataType: DataType // Domain property
+        dataType: DataType
         data: any
     }
 }

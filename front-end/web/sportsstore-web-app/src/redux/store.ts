@@ -1,9 +1,10 @@
-import { createStore } from "redux"
+import { applyMiddleware, createStore } from "redux"
 import { shopReducer } from "./reducers/ShopReducer"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import { cartReducer } from "./reducers/CartReducer"
 import { ShopActionType } from "./actions/ShopActionCreators"
 import { CartActionType } from "./actions/CartActionCreators"
+import { asyncActions } from "./middleware/AsyncMiddleware"
 
 export interface Action {
     type: any,
@@ -18,7 +19,10 @@ const CommonReducer = (...reducers: ((state: any, action: Action) => any)[]) => 
         ? reducers[i](state, action)
         : state
 }
-export const sportsStoreDataStore = createStore(CommonReducer(shopReducer, cartReducer))
+export const sportsStoreDataStore = createStore(
+    CommonReducer(shopReducer, cartReducer),
+    applyMiddleware(asyncActions),
+)
 
 export type RootState = ReturnType<typeof sportsStoreDataStore.getState>
 export type AppDispatch = typeof sportsStoreDataStore.dispatch

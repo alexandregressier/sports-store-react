@@ -1,21 +1,12 @@
-import { Product } from "../domain"
-import { addToCart, CartActionType, removeFromCart, updateCartQuantity } from "../actions/CartActionCreators"
+import { CartAction, removeFromCart } from "../actions/cartActions"
 import "scope-extensions-js"
 import { initState, SportsStoreState } from "../state"
-
-export interface CartAction {
-    type: CartActionType,
-    payload?: {
-        product: Product,
-        quantity?: number,
-    }
-}
 
 export const cartReducer = (state: SportsStoreState = initState, action: CartAction): SportsStoreState => {
     const newState: SportsStoreState = { ...state }
     switch (action.type) {
-        case CartActionType.CART_ADD:
-            (action as ReturnType<typeof addToCart>).payload.let(({ product, quantity }) => {
+        case "ADD_TO_CART":
+            action.payload.let(({ product, quantity }) => {
                 let existingProduct = newState.cart.find(it => it.product.id === product.id)
                 if (existingProduct) {
                     existingProduct.quantity += quantity
@@ -26,8 +17,9 @@ export const cartReducer = (state: SportsStoreState = initState, action: CartAct
                 newState.cartTotal += product.price * quantity
             })
             return newState
-        case CartActionType.CART_UPDATE:
-            (action as ReturnType<typeof updateCartQuantity>).payload.let(({ product, quantity }) => {
+
+        case "UPDATE_CART_QUANTITY":
+            action.payload.let(({ product, quantity }) => {
                 newState.cart = newState.cart.map(it => {
                     if (it.product.id === product.id) {
                         (quantity - it.quantity).let(quantityDiff => {
@@ -41,7 +33,8 @@ export const cartReducer = (state: SportsStoreState = initState, action: CartAct
                 })
             })
             return newState
-        case CartActionType.CART_REMOVE:
+
+        case "REMOVE_FROM_CART":
             (action as ReturnType<typeof removeFromCart>).payload.run(function () {
                 newState.cart.find(it => it.product.id === this.product.id)?.let(({ product, quantity }) => {
                     newState.cart = newState.cart.filter(it => it.product.id !== product.id)
@@ -50,8 +43,8 @@ export const cartReducer = (state: SportsStoreState = initState, action: CartAct
                 })
             })
             return newState
-        case CartActionType.CART_CLEAR:
+
+        case "EMPTY_CART":
             return { ...state, cart: [], cartItems: 0, cartTotal: 0 }
     }
-    return state
 }

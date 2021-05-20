@@ -1,6 +1,8 @@
 import React from "react"
+import { Button } from "components/common"
 
 export const App = () =>
-    <div>
+    <>
         <h1>styled-components</h1>
-    </div>
+        <Button>Yes</Button>
+    </>

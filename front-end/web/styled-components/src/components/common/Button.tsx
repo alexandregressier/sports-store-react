@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const Button = styled.button`
+interface Props {
+    secondary?: boolean
+}
+
+export const Button = styled.button<Props>`
     display: block;
     width: 100%;
     padding: 8px;
@@ -9,7 +13,7 @@ export const Button = styled.button`
     box-shadow: none;
 
     color: white;
-    background-color: #f8049c;
+    background-color: ${p => p.secondary ? "black" : "#f8049c"};
 
     font-size: 1em;
     font-weight: bold;

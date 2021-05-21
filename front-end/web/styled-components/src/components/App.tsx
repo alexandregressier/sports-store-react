@@ -18,5 +18,6 @@ export const App = () =>
     <>
         <GlobalStyle/>
         <h1>styled-components</h1>
-        <Button>Yes</Button>
+        <Button>Primary Button</Button>
+        <Button secondary>Secondary Button</Button>
     </>
